@@ -1,3 +1,5 @@
+import {TO_HUMAN_TRANSFER_TEXT, TO_BOT_TRANSFER_TEXT } from 'constants';
+
 export function isCarousel(message) {
   return Object.keys(message).includes('attachment')
     && Object.keys(message.attachment).includes('type')
@@ -29,4 +31,14 @@ export function isButtons(message) {
   return Object.keys(message).length === 2
     && Object.keys(message).includes('text')
     && (Object.keys(message).includes('quick_replies') || Object.keys(message).includes('buttons'));
+}
+
+export function isTransferReq(message) {
+    const botToHumanTransfer = Object.keys(message).includes('text')
+    && message.text === TO_HUMAN_TRANSFER_TEXT
+
+    const humanToBotTransfer = Object.keys(message).includes('text')
+    && message.text === TO_BOT_TRANSFER_TEXT
+
+    return botToHumanTransfer || humanToBotTransfer
 }

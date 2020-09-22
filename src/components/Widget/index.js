@@ -31,11 +31,12 @@ import {
   changeOldUrl,
   setDomHighlight,
   evalUrl,
-  setCustomCss
+  setCustomCss,
+  changeSocketUrl
 } from 'actions';
 
-import { SESSION_NAME, NEXT_MESSAGE } from 'constants';
-import { isVideo, isImage, isButtons, isText, isCarousel } from './msgProcessor';
+import { SESSION_NAME, NEXT_MESSAGE, BOT_URL, HUMAN_URL } from 'constants';
+import { isVideo, isImage, isButtons, isText, isCarousel, isTransferReq } from './msgProcessor';
 import WidgetLayout from './layout';
 import { storeLocalSession, getLocalSession } from '../../store/reducers/helper';
 
@@ -357,11 +358,14 @@ class Widget extends Component {
       initialized,
       connectOn,
       tooltipPayload,
-      tooltipDelay
+      tooltipDelay,
+      socketUrl,
+      reconnect
     } = this.props;
-    if (!socket.isInitialized()) {
-      socket.createSocket();
-
+    console.log("Reconnecting? : ",reconnect, " to ", socketUrl);
+    if (!socket.isInitialized() || reconnect) {
+      console.log("Connected: ", socketUrl);
+      socket.createSocket(socketUrl);
       socket.on('bot_uttered', (botUttered) => {
         // botUttered.attachment.payload.elements = [botUttered.attachment.payload.elements];
         // console.log(botUttered);
@@ -533,7 +537,14 @@ class Widget extends Component {
     }
     const { customCss, ...messageClean } = message;
 
-    if (isText(messageClean)) {
+    if (isTransferReq(messageClean)){
+        // inform user that transfer is in process
+        // then do the transfer
+        this.props.dispatch(addResponseMessage(messageClean.text));
+        console.log(">>>>>>>>>>>>> DOing disptach")
+        this.props.dispatch(changeSocketUrl());
+
+    } else if (isText(messageClean)) {
       this.props.dispatch(addResponseMessage(messageClean.text));
     } else if (isButtons(messageClean)) {
       this.props.dispatch(addButtons(messageClean));
@@ -610,6 +621,8 @@ class Widget extends Component {
 }
 
 const mapStateToProps = state => ({
+  reconnect: state.behavior.get('reconnect'),
+  socketUrl: state.behavior.get('socketUrl'),
   initialized: state.behavior.get('initialized'),
   connected: state.behavior.get('connected'),
   isChatOpen: state.behavior.get('isChatOpen'),
@@ -661,6 +674,8 @@ Widget.propTypes = {
 };
 
 Widget.defaultProps = {
+  socketUrl: BOT_URL,
+  reconnect: false,
   isChatOpen: false,
   isChatVisible: true,
   fullScreenMode: false,

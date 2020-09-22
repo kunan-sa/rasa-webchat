@@ -3,6 +3,15 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 export const SESSION_NAME = 'chat_session';
 
+export const HUMAN_URL = "http://localhost:5005" //rasa-endpoint 
+
+export const BOT_URL = "http://localhost:5006" //human-chat-endpoint
+
+export const TO_HUMAN_TRANSFER_TEXT = "Estás siendo transferido a un humano";
+
+export const TO_BOT_TRANSFER_TEXT = "Hola!";
+
+
 export const MESSAGE_SENDER = {
   CLIENT: 'client',
   RESPONSE: 'response'

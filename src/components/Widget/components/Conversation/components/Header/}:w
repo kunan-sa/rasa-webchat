@@ -27,7 +27,7 @@ const Header = ({
       <div style={{ backgroundColor: mainColor }}className={`rw-header ${subtitle ? 'rw-with-subtitle' : ''}`}>
         {
           profileAvatar && (
-          <div className="rw-avatar">{profileAvatar}</div>
+          <div className="rw-emoji">{profileAvatar}</div>
           )
         }
         <div className="rw-header-buttons">

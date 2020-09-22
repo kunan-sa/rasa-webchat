@@ -1,3 +1,4 @@
+export const CHANGE_SOCKET_URL = "CHANGE_SOCKET_URL";
 export const INITIALIZE = 'INITIALIZE';
 export const CONNECT = 'CONNECT';
 export const DISCONNECT = 'DISCONNECT';

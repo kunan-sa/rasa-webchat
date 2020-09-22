@@ -1,5 +1,5 @@
 import { Map, fromJS } from 'immutable';
-import { SESSION_NAME } from 'constants';
+import { SESSION_NAME, BOT_URL, HUMAN_URL } from 'constants';
 import * as actionTypes from '../actions/actionTypes';
 import { getLocalSession, storeParamsTo } from './helper';
 
@@ -11,6 +11,8 @@ export default function (
   onWidgetEvent = {},
 ) {
   const initialState = Map({
+    socketUrl: BOT_URL,
+    reconnect: false,
     connected: false,
     initialized: false,
     isChatVisible: true,
@@ -29,6 +31,16 @@ export default function (
     const storeParams = storeParamsTo(storage);
     switch (action.type) {
       // Each change to the redux store's behavior Map gets recorded to storage
+      case actionTypes.CHANGE_SOCKET_URL: {
+        const actualSock = state.get('socketUrl');
+        if (actualSock === BOT_URL) {
+            return storeParams(state.update('socketUrl', socketUrl => HUMAN_URL).set('initialized', false).set('reconnect', true));
+        } else if (actualSock === HUMAN_URL) {
+            return storeParams(state.update('socketUrl', socketUrl => BOT_URL).set('initialized', false).set('reconnect', true));
+        }
+
+      }
+
       case actionTypes.SHOW_CHAT: {
         if (onWidgetEvent.onChatVisible) onWidgetEvent.onChatVisible();
         return storeParams(state.update('isChatVisible', () => true));

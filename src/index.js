@@ -55,9 +55,9 @@ const ConnectedWidget = forwardRef((props, ref) => {
       }
     }
 
-    createSocket() {
+    createSocket(socketUrl) {
       this.socket = socket(
-        this.url,
+        socketUrl,
         this.customData,
         this.path,
         this.protocol,

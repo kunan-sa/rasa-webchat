@@ -1,6 +1,10 @@
 import { store } from '../../index';
 import * as actions from './index';
 
+export function changeSocketUrl() {
+  store.dispatch(actions.changeSocketUrl());
+}
+
 export function isOpen() {
   return store.dispatch(actions.getOpenState());
 }

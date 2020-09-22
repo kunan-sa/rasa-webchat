@@ -1,5 +1,12 @@
 import * as actions from './actionTypes';
 
+export function changeSocketUrl() {
+  return {
+    type: actions.CHANGE_SOCKET_URL
+  };
+
+}
+
 export function initialize() {
   return {
     type: actions.INITIALIZE
