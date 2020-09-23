@@ -599,10 +599,10 @@ class Widget extends Component {
         toggleChat={() => this.toggleConversation()}
         toggleFullScreen={() => this.toggleFullScreen()}
         onSendMessage={event => this.handleMessageSubmit(event)}
-        title={this.props.title}
-        subtitle={this.props.subtitle}
+        title={this.props.title+ " 👋"}
+        subtitle={this.props.socketUrl===BOT_URL?"Talking with bot!":"Talking with human!"}
         customData={this.props.customData}
-        profileAvatar={this.props.profileAvatar}
+        profileAvatar={this.props.socketUrl===BOT_URL?"🤖":"🗣️"}
         showCloseButton={this.props.showCloseButton}
         showFullScreenButton={this.props.showFullScreenButton}
         hideWhenNotConnected={this.props.hideWhenNotConnected}

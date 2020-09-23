@@ -104,7 +104,7 @@ class Messages extends Component {
           {
             profileAvatar &&
             message.get('showAvatar') &&
-            <img src={profileAvatar} className="rw-avatar" alt="profile" />
+            <div className="rw-avatar">{profileAvatar}</div> 
           }
           {this.getComponentToRender(message, index, index === messages.size - 1)}
           {renderMessageDate(message)}

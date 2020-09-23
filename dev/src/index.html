@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Botfront - Web Chat</title>
+    <title>Web Chat(Rasa + Handoff!)</title>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<body style="background: lightcyan;">
-<!-- <body style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/4/42/Main_menu_of_Wikipedia.png);"> -->
-  <a href="#" onclick="WebChat.send('/chitchat.greet')">Send chitchat.greet without text</a>
-  <br />
-  <a href="#" onclick="WebChat.send('/chitchat.greet', 'salut')">Send chitchat.greet with text</a>
-  <span style="height: 400px; display: block;">test</span>
-  <span style="height: 400px; display: block;">test</span>
-  <span style="height: 400px; display: block;">test</span>
-  <h1 class="test"> test</h1>
-  <button class="my-button"> MY BUTTON</button>
-  <script src="index.js"  type="text/javascript"></script>
-  <div style="width: 400px; height: 2000px; border: 3px solid lightsalmon;" id="webchat" />
+  <body style="background: url(https://i.imgur.com/0IPtk0N.png) center left/80% no-repeat fixed #fff;">
+  <script src="index.js" type="text/javascript"></script>
+  <div id="webchat" />
 <script>
   WebChat.default.init({
     // embedded: true,
@@ -26,9 +17,9 @@
     tooltipDelay: 40000,
     socketPath: "/socket.io/",
     customData: {
-      language: 'fr'
+      language: 'en'
     },
-    subtitle: 'A',
+    subtitle: '',
     inputTextFieldHint: "Type a message...",
     connectingText: "Waiting for server...",
     profileAvatar: "🤖",
@@ -57,8 +48,8 @@
       },
       storage: "local"
     },
-    mainColor: "#32a852",
-    userBackgroundColor: "#24753a",
+    mainColor: "#cc5a1d",
+    userBackgroundColor: "#122c57",
     userTextColor: "#cad9ce",
   })
 </script>

@@ -22,6 +22,9 @@
       left: 14px;
     }
   }
+  .#{$namespace}avatar.emoji-header{
+    font-size: 35px;
+    }
 
   .#{$namespace}header.#{$namespace}with-subtitle {
     height: 70px;
