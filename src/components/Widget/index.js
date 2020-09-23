@@ -541,7 +541,10 @@ class Widget extends Component {
         // inform user that transfer is in process
         // then do the transfer
         this.props.dispatch(addResponseMessage(messageClean.text));
-        console.log(">>>>>>>>>>>>> DOing disptach")
+        console.log(">>>>>>>>>>>>> Doing disptach")
+        if (this.props.socket) {
+          this.props.socket.close();
+        }
         this.props.dispatch(changeSocketUrl());
 
     } else if (isText(messageClean)) {
